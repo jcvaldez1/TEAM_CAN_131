@@ -6,7 +6,7 @@ MONTH_COLUMN = 7
 DAY_COLUMN = 8
 
 #read the data_set based off argument value
-df = pd.read_csv("ap_data.csv")
+df = pd.read_csv(sys.argv[1])
 
 
 price = df.iloc[:,HIGH_PRICE].copy().tolist() 
