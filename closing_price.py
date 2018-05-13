@@ -27,7 +27,7 @@ for x in range(0,len(months)):
 
 fig = plt.figure()
 plt.plot(x_values,price)
-fig.suptitle('Closing Price against time AP', fontsize=20)
+fig.suptitle('Closing Price against time', fontsize=20)
 plt.xlabel('days', fontsize=18)
 plt.ylabel('price', fontsize=16)
 fig.savefig('closing_price')
