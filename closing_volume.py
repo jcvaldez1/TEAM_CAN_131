@@ -1,7 +1,7 @@
 import sys
 import pandas as pd
 import matplotlib.pyplot as plt
-HIGH_PRICE = 0
+VOLUME = 6
 MONTH_COLUMN = 7
 DAY_COLUMN = 8
 
@@ -9,7 +9,7 @@ DAY_COLUMN = 8
 df = pd.read_csv(sys.argv[1])
 
 
-price = df.iloc[:,HIGH_PRICE].copy().tolist() 
+price = df.iloc[:,VOLUME].copy().tolist() 
 months = df.iloc[:,MONTH_COLUMN].copy().tolist()
 days = df.iloc[:,DAY_COLUMN].copy().tolist()
 
@@ -27,7 +27,7 @@ for x in range(0,len(months)):
 
 fig = plt.figure()
 plt.plot(x_values,price)
-fig.suptitle('Closing Price against time', fontsize=20)
+fig.suptitle('Closing Volume against time', fontsize=20)
 plt.xlabel('days', fontsize=18)
 plt.ylabel('price', fontsize=16)
-fig.savefig(sys.argv[1].split('_')[0] + '_closing_price')
+fig.savefig(sys.argv[1].split('_')[0] + '_closing_volume')
