@@ -11,7 +11,7 @@ data = ['ap_data.csv', 'ceb_data.csv', 'chib_data.csv', 'gtcap_data.csv', 'mbt_d
 fig = plt.figure()
 fig.suptitle('Closing Price against time', fontsize=20)
 for i in range(len(data)):
-	df = pd.read_csv(data[i])
+	df = pd.read_csv('../csv_files/'+data[i])
 
 	price = df.iloc[:,HIGH_PRICE].copy().tolist() 
 	months = df.iloc[:,MONTH_COLUMN].copy().tolist()
@@ -35,6 +35,6 @@ for i in range(len(data)):
 	plt.xlabel('Days', fontsize=18)
 	plt.ylabel('Price', fontsize=16)
 	plt.legend(loc = 'upper right')
-	#fig.savefig(data[i].split('_')[0] + '_closing_price')
+	fig.savefig(data[i].split('_')[0] + '_closing_price')
 fig.savefig('all' + '_closing_price')
 plt.show()
