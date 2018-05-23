@@ -3,6 +3,7 @@
 	java PvmmCurveFitter <file_name.csv>
 */
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import Jama.*;
 import org.joda.time.*;
@@ -13,7 +14,6 @@ public class PvmmCurveFitter{
 	CsvToMatrixParser ctmp;
 	ArrayList<String[]> parseList;
 
-
 	Matrix previousPriceVector;
 	Matrix previousVolumeVector;
 	Matrix momentum22Vector;
@@ -22,26 +22,38 @@ public class PvmmCurveFitter{
 	Matrix finalMatrixA;
 	Matrix closingPriceVectorB;
 	Matrix finalVectorX;
+	
+	PrintWriter writer;
 
 	public static void main(String args[]){
 		PvmmCurveFitter pcf = new PvmmCurveFitter();
-		pcf.theRealMain(args);
+		String csvFiles[] = new String[7];
+		csvFiles[0] = "ap_data.csv";
+		csvFiles[1] = "ceb_data.csv";
+		csvFiles[2] = "chib_data.csv";
+		csvFiles[3] = "gtcap_data.csv";
+		csvFiles[4] = "mbt_data.csv";
+		csvFiles[5] = "meg_data.csv";
+		csvFiles[6] = "rlc_data.csv";
+		pcf.theRealMain(csvFiles);
 	}
 
-	public void theRealMain(String args[]){
+	public void theRealMain(String csvFiles[]){
 		ctmp = new CsvToMatrixParser();
-		//parseList = ctmp.parseCsvToList("ap_data.csv");
 		try{
-			parseList = ctmp.parseCsvToList(args[0]);
-		}catch(ArrayIndexOutOfBoundsException e){
-			System.out.println("No arguments given; Must run program like this: java PvmmCurveFitter <file_name.csv>");
+			writer = new PrintWriter("_FINAL_EQUATIONS.txt", "UTF-8");
+			for(String csvFile : csvFiles){//loop through every csvFile
+				String relativePath = "../csv_files/" + csvFile;
+				parseList = ctmp.parseCsvToList(relativePath);
+				initVectorsAndMatrices();
+				finalVectorX = finalMatrixA.solve(closingPriceVectorB);
+				printFinalAnswerX(csvFile);
+			}		
+			writer.close();
+		}catch(Exception e){
+			e.printStackTrace();
 			System.exit(1);
 		}
-		initVectorsAndMatrices();
-		//printFinalMatrixA();
-		//finalVectorX = finalMatrixA.solve(closingPriceVectorB);
-		//finalVectorX.print(15, 12);//print final answer with minimum 15 digits, and 12 digits after decimal point
-		printFinalAnswerX();
 	}
 
 	//initializes the matrix and vectos needed for Ax = b
@@ -56,32 +68,20 @@ public class PvmmCurveFitter{
 		finalMatrixA = concatLR(finalMatrixA, momentum22Vector);
 		finalMatrixA = concatLR(finalMatrixA, momentum7Vector);
 	}
-
-	//prints out final answer from vectorX
-	public void printFinalAnswerX(){
-		finalVectorX = finalMatrixA.solve(closingPriceVectorB);
+	
+	//prints out final answer from vectorX in command line and text file fileName
+	public void printFinalAnswerX(String fileName){
 		double pPrev = finalVectorX.get(0, 0);
 		double vPrev = finalVectorX.get(1, 0);
 		double mom22 = finalVectorX.get(2, 0);
 		double mom7 = finalVectorX.get(3, 0);
-		System.out.printf(
-			"Pnow =\n\t%14.12f  Pprev\n"
+		String output = String.format(fileName + ":\n"
+			+ "Pnow =\n\t%14.12f  Pprev\n"
 			+ "  +\t%14.12f  Vprev\n"
 			+ "  +\t%14.12f  mom22\n"
-			+"  +\t%14.12f  mom7\n", pPrev, vPrev, mom22, mom7
-		);
-	}
-
-	//prints out Matrix A in tabular format, for debugging
-	public void printFinalMatrixA(){
-		System.out.println("Pnow\tPprev\tVprev\t\tmom22\tmom7");
-		for(int i = 0; i < finalMatrixA.getRowDimension(); i++){
-			double pPrev = finalMatrixA.get(i, 0);
-			double vPrev = finalMatrixA.get(i, 1);
-			double mom22 = finalMatrixA.get(i, 2);
-			double mom7 = finalMatrixA.get(i, 3);
-			System.out.printf("%.2f\t%9.0f\t%.4f\t%.4f\n", pPrev, vPrev, mom22, mom7);
-		}
+			+ "  +\t%14.12f  mom7\n\n", pPrev, vPrev, mom22, mom7);
+		System.out.print(output);//command line output
+		writer.print(output);//text file output
 	}
 
 	//concats matrix a with matrix b on right, like: c = [a, b] in matlab
@@ -174,6 +174,18 @@ public class PvmmCurveFitter{
 		return momTum;
 	}
 
+	//prints out Matrix A in tabular format, for debugging
+	public void printFinalMatrixA(){
+		System.out.println("Pnow\tPprev\tVprev\t\tmom22\tmom7");
+		for(int i = 0; i < finalMatrixA.getRowDimension(); i++){
+			double pPrev = finalMatrixA.get(i, 0);
+			double vPrev = finalMatrixA.get(i, 1);
+			double mom22 = finalMatrixA.get(i, 2);
+			double mom7 = finalMatrixA.get(i, 3);
+			System.out.printf("%.2f\t%9.0f\t%.4f\t%.4f\n", pPrev, vPrev, mom22, mom7);
+		}
+	}
+	
 	//testing and debugging purposes
 	void sandboxTesting(){
 		//		How to use datetime formatter:
