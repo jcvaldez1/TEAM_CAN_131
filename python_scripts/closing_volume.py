@@ -31,7 +31,7 @@ for i in range(len(data)):
 
 	plt.plot(x_values,price)
 	plt.xlabel('days', fontsize=18)
-	plt.ylabel('price', fontsize=16)
+	plt.ylabel('volume', fontsize=16)
 	plt.legend(loc = 'upper right')
 fig.savefig('all' + '_closing_volume')
 plt.show()
