@@ -10,7 +10,7 @@ import Jama.*;
 
 
 public class CsvToMatrixParser{
-	public static void main(String[] args){		
+	public static void main(String[] args){
 		CsvToMatrixParser me = new CsvToMatrixParser(); //creates an instance of itself to access its non static methods
 		ArrayList<String[]> dataRows = null; //initialize arrayList of mutable rows to hold parsed data
 		Matrix dataMatrix = null;
@@ -19,13 +19,13 @@ public class CsvToMatrixParser{
 		}catch(ArrayIndexOutOfBoundsException e){
 			e.printStackTrace();//catch if no extra args were given during program exec
 			System.exit(1);
-		}	
+		}
 
 		int colIs[] = {6, 7, 8, 0};//indexes for [y, m, d, c] columns
 		dataMatrix = me.parseListToMatrix(dataRows, colIs);//calls method to convert dataRows list to a matrix with only colIs as columns
 		dataMatrix.print(6,2); //prints matrix with column width of 6 and 2 numbers after decimal point
 	}
-	
+
 	//returns a a parsed Arraylist of rows from the csv of fileName
 	public ArrayList<String[]> parseCsvToList(String fileName){
 		File file = new File(fileName);//File object for Scanner to read
@@ -39,12 +39,12 @@ public class CsvToMatrixParser{
 			}
 			scanFile.close();
 		}catch(FileNotFoundException e){
-			e.printStackTrace();//catch if invalid fileName given
+			System.out.println("I dont find no file of that name sonny boi");
 			System.exit(1);
 		}
 		return dataRows;
 	}
-	
+
 	//returns a parsed Matrix from the dataRows list and and int array of column indexes
 	public Matrix parseListToMatrix(ArrayList<String[]> dataRows, int[] colIs){
 		Matrix dataMatrix = new Matrix(dataRows.size(), colIs.length);//what will be returned
@@ -61,6 +61,6 @@ public class CsvToMatrixParser{
 			}
 		}
 		return dataMatrix;
-	}	
-	
+	}
+
 }
