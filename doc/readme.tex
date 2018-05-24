@@ -87,23 +87,72 @@
 
 	\section{Methodology}
 
+	A dataset of the Philippine stock exchange was retrieved from Kaggle.
+	The seven companies were chosen because of their relative volatility and their influence to the stock market as a whole.
+
 	\begin{figure}[h]
 		\centering
 		\includegraphics{ap_closing_price.png}
-		\caption{Closing prices}
+		\caption{Closing price graph of GTCAP, showing its volatility}
+		\label{fig:gtcap_graph}
+	\end{figure}
+
+	\subsection{Preprocessing}
+		\subsubsection{Removing irrelevant companies}
+		There were many companies in the dataset. The rows containing companies irrelevant to the study were removed.
+		The remaining rows were grouped by company, then separated into seven \texttt{.csv} files.
+		\subsubsection{Finding the right price}
+		The dataset did not have data for all the points of interest.
+		For example, during holy week, there were no entries because the stock market was closed.
+		If the group needed an entry at time $t$, the entry at the greatest 
+		$t_{prev}$ was considered, where $t_{prev} > t$
+		\subsubsection{Extracting relevant features}
+		Just as there were too many rows, there were some irrelevant columns in the dataset.
+		The group only needed the company name, the closing price, the trading volume, and the date at which the trade occurred.
+		Only those columns (features) were considered for the rest of the research.
+
+	\subsection{Graphing}
+	Four python scripts located in \texttt{python\_scripts/} were made to graph the four terms in the predictor over time.
+	The module \texttt{matplotlib} was used to plot the resulting graphs.
+
+	\subsection{Finding the right coefficients}
+	The coefficients for the predictor for each of the companies were found using linear least squares regression.
+
+	\section{Results and Discussion}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics{all_closing_price.png}
+		\caption{Graph of closing prices}
 		\label{fig:close_price_graph}
 	\end{figure}
 
-	Take a look at Figure~\ref{fig:close_price_graph}. On the x-axis is
-	\texttt{days} and the y-axis is \textbf{price}
-	\subsection{Preprocessing}
-	In this section we take a look at the data processing required to make the
-	data workable.
-		\subsubsection{Removing irrelevant companies}
-		Go through each entry one by one and delete it if it's not one of the tracked companies.
+	\begin{figure}[h]
+		\centering
+		\includegraphics{all_closing_volume.png}
+		\caption{Graph of closing volumes}
+		\label{fig:close_volume_graph}
+	\end{figure}
 
-	\section{Results}
-	\section{Discussion}
+	\begin{figure}[h]
+		\centering
+		\includegraphics{all_momentum_step_22.png}
+		\caption{Graph of closing price momentum with $h=22$}
+		\label{fig:close_m22_graph}
+	\end{figure}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics{all_momentum_step_7.png}
+		\caption{Graph of closing price momentum with $h=72$}
+		\label{fig:close_m7_graph}
+	\end{figure}
+
+	As shown in Figure~\ref{fig:close_price_graph}, most of the companies have an unpredictable looking price graph.
+
+	In Figure~\ref{fig:close_volume_graph}, it shows the total volume of trades the company went over time.
+	The graph shows a "stairs" pattern, showing the spikes in buying and selling when prices fluctuate.
+
 	\section{Conclusion}
 	\begin{thebibliography}{9}
 		\bibitem{heath}
