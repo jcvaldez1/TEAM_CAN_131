@@ -160,6 +160,23 @@
 	It is worth noting that the momentum reaches farther into the negative side than the positive side, for both graphs.
 	The momentum graph for $h=22$ is less erratic and shows more stability, however the momentum graph for $h=7$ reflects the instantaneous derivative better.
 	Going to a larger stepsize means trading off accuracy for stability.
+	
+	\begin{figure}[h]
+		\begin{tabular}[h]{|c|c|c|c|c|}
+			\hline
+			Company & $\alpha$ & $\beta$ & $\sigma$ & $\gamma$ \\\hline
+			AP & 0.999909308676 & 0.000000000893 & -0.002057696004 & 1.223340993478 \\\hline
+			CEB & 1.223340993478 & 0.000000014819 & 0.040550002555 & 1.378957068841 \\\hline
+			CHIB & 0.998817540958 & 0.000000000015 & 0.134914332815 & 1.571397313188\\\hline
+			GTCAP & 0.999805323406 & 0.000000601056 & 0.430392355966 & 1.158406101105 \\\hline
+			MBT & 0.999110807743 & 0.000000017390 & 0.089714560749 & 1.419385112693\\\hline
+			MEG & 0.999526525917 & 0.000000000024 & -0.000000000024 & 1.501996489010 \\\hline
+			RLC & 0.999311080033 & 0.000000003205 & 0.115358802114 & 1.392324898465 \\\hline
+			Average & 0.999463266205 & 0.000000091058 & 0.110422779598 & 1.378286853826 \\\hline
+		\end{tabular}
+		\centering
+		\caption{Table of computed optimal coefficient values}
+	\end{figure}
 
 	\section{Conclusion}
 	\begin{thebibliography}{9}
