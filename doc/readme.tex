@@ -45,7 +45,7 @@
 	$$ P(t,m) = \alpha f(t) + \beta m_{t} $$
 
 	then it must be that $\beta > 0$, which indicates that the momentum 
-	positively influences stock prices, so that it is consistent with 
+	positively influences stock prices, making the equation consistent with 
 	momentum investing theory.
 
 	A good guess for $P(t,m)$, the \textit{predictor} would be 
@@ -70,6 +70,20 @@
 
 	$$ P(t_{k+1},m) = \alpha P(t_{k}) + \beta V(t_{k}) +
 	\gamma m^{h=22}_{t_k} + \sigma m^{h=7}_{t_k}$$
+
+	Now the predictor uses two momentums computed over different time intervals.
+	Finding the value for these coefficients is as simple as applying linear least squares regression over a set of data points.
+
+	The group will find the optimal coefficients for seven companies in the Philippine stock exchange:
+	\begin{itemize}
+		\item AP
+		\item CEB
+		\item CHIB
+		\item GTCAP
+		\item MBT
+		\item MEG
+		\item RLC
+	\end{itemize}
 
 	\section{Methodology}
 
