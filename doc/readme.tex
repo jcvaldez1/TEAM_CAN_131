@@ -23,7 +23,7 @@
 	While it would not be impossible to gather all the possible factors that could affect the price of a specific stock and make a mathematical equation describing how each factors into predicting the future price of a stock, it is likely that there are too many factors for any human built system to track.
 
 	The most obvious way of making money in the stock market via trading stocks is \textit{arbitrage}, more commonly known as "buy low, sell high".
-	Less known is the more effective technique called \textit{momentum investing}, summarized as "buy high, sell higher". 
+	Less known to the layman is the more effective technique called \textit{momentum investing}, summarized as "buy high, sell higher". 
 
 	Momentum investing became a popular strategy after investors and economists noticed that if a stock has been performing well over a time period of three to twelve months, then it will continue to do well.
 	That is, if the price of a stock has had high returns for a long time, then it will continue to have high returns.
@@ -161,7 +161,7 @@
 	The momentum graph for $h=22$ is less erratic and shows more stability, however the momentum graph for $h=7$ reflects the instantaneous derivative better.
 	Going to a larger stepsize means trading off accuracy for stability.
 	
-	\begin{figure}[h]
+	\begin{figure}[p]
 		\begin{tabular}[h]{|c|c|c|c|c|}
 			\hline
 			Company & $\alpha$ & $\beta$ & $\sigma$ & $\gamma$ \\\hline
@@ -176,13 +176,46 @@
 		\end{tabular}
 		\centering
 		\caption{Table of computed optimal coefficient values}
+		\label{fig:coeffs}
 	\end{figure}
 
+	The table of optimal coefficients for the predictor 
+
+	$$ P(t_{k+1},m) = \alpha P(t_{k}) + \beta V(t_{k}) +
+	\gamma m^{h=22}_{t_k} + \sigma m^{h=7}_{t_k}$$
+	
+	is shown in Figure~\ref{fig:coeffs}. 
+
+	For most of the companies, 7-day momentum has more influence than the
+	22-day momentum, not just because of it having a more positive coefficient,
+	but also because the values for 7-day momentum are generally more extreme
+	than 22-day momentum.
+
+	Cumulative closing trading volume has almost a zero coefficient on the predictor equation for all of the companies.
+
+	Previous price coefficient is almost one for all companies.
+
+	On average, the companies displayed similar tendencies except on the 22-day momentum coefficient, where they varied wildly.
+
 	\section{Conclusion}
+
+	7-day momentum has a bigger effect on future stock price than 22-day momentum.
+	Cumulative closing trading volume has no effect on the future stock price.
+	Future prices tend to stay close to the previous price, which indicates an overall stability in price in the stock of the surveyed companies.
+
 	\begin{thebibliography}{9}
 		\bibitem{heath}
 			Heath M.,
 
 			\textit{Scientific Computing - An Introductory Survey}
+		\bibitem{momentum}
+			Low, R.K.Y.; Tan, E.
+			(2016).
+			"The Role of Analysts' Forecasts in the Momentum Effect"
+			. International Review of Financial Analysis. 
+		\bibitem{kaggle}
+			Philippine Stock Exchange Data,
+
+			https://www.kaggle.com/ianchute/philippine-stock-exchange-data
 	\end{thebibliography}
 \end{document}
