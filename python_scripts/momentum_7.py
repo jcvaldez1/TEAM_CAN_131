@@ -65,7 +65,6 @@ for i in range(len(data_list)):
 	plt.xlabel('Days', fontsize=18)
 	plt.ylabel('Price', fontsize=16)
 	plt.legend(loc = 'upper right')
-	fig.savefig(data_list[i].split('_')[0] + '_momentum_step_7')
 
 fig.savefig('all' + '_momentum_step_7')
 plt.show()

@@ -35,6 +35,5 @@ for i in range(len(data)):
 	plt.xlabel('Days', fontsize=18)
 	plt.ylabel('Price', fontsize=16)
 	plt.legend(loc = 'upper right')
-	fig.savefig(data[i].split('_')[0] + '_closing_price')
 fig.savefig('all' + '_closing_price')
 plt.show()
