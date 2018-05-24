@@ -1,3 +1,7 @@
 # TEAM_CAN_131
-Optimization of the pokemon damage formula
-SO SHUCKLE COULD TANK LOTS-A'-DAMAGE
+
+CS 131 MP2
+
+Poster is in main directory.
+Readme is in `doc/` folder
+Graphs are in `doc/` folder.
