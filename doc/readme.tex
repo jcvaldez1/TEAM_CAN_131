@@ -127,12 +127,17 @@
 		\label{fig:close_price_graph}
 	\end{figure}
 
+	As shown in Figure~\ref{fig:close_price_graph}, most of the companies have an unpredictable looking price graph.
+
 	\begin{figure}[h]
 		\centering
 		\includegraphics{all_closing_volume.png}
 		\caption{Graph of closing volumes}
 		\label{fig:close_volume_graph}
 	\end{figure}
+
+	In Figure~\ref{fig:close_volume_graph}, it shows the total volume of trades the company went over time.
+	The graph exhibits a "stairs" pattern, showing the spikes in buying and selling when prices fluctuate.
 
 	\begin{figure}[h]
 		\centering
@@ -148,10 +153,13 @@
 		\label{fig:close_m7_graph}
 	\end{figure}
 
-	As shown in Figure~\ref{fig:close_price_graph}, most of the companies have an unpredictable looking price graph.
+	Stock prices tend to fluctuate the same way a heart beat wave fluctuates in an ECG monitor.
+	The momentum graphs (shown in Figure~\ref{fig:close_m22_graph} and Figure~\ref{fig:close_m7_graph}), which is a derivative of the price graph, looks like a bunch of candle sticks.
+	Each abrupt spike/drop in price gets converted into an impulse in the momentum that shoots upward/downward. 
 
-	In Figure~\ref{fig:close_volume_graph}, it shows the total volume of trades the company went over time.
-	The graph shows a "stairs" pattern, showing the spikes in buying and selling when prices fluctuate.
+	It is worth noting that the momentum reaches farther into the negative side than the positive side, for both graphs.
+	The momentum graph for $h=22$ is less erratic and shows more stability, however the momentum graph for $h=7$ reflects the instantaneous derivative better.
+	Going to a larger stepsize means trading off accuracy for stability.
 
 	\section{Conclusion}
 	\begin{thebibliography}{9}
